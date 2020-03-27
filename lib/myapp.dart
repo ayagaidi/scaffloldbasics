@@ -5,6 +5,27 @@ class myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+            new DrawerHeader(child: new Icon(Icons.home)),
+            new ListTile(
+              selected: true,
+              onTap: () {},
+              trailing: new Switch(value: true, onChanged: null),
+              leading: new Icon(Icons.home),
+              title: new Text("hello"),
+              subtitle: new Text("good morning"),
+            ),
+            new AboutListTile(
+              aboutBoxChildren: <Widget>[
+                 new Text('just test ')
+              ],
+              child: new Text('exit'),
+            )
+          ],
+        ),
+      ),
       floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.supervised_user_circle, color: Colors.white),
         onPressed: null,
@@ -54,10 +75,9 @@ class myapp extends StatelessWidget {
         new FlatButton(onPressed: null, child: new Text("two")),
         new FlatButton(onPressed: null, child: new Text("three")),
       ],
-      bottomNavigationBar:
-      new BottomAppBar(
-        child:
-        new Text('all copy right to aya'),),
+      bottomNavigationBar: new BottomAppBar(
+        child: new Text('all copy right to aya'),
+      ),
 
 //      BottomNavigationBar(items: <BottomNavigationBarItem>[
 //        new BottomNavigationBarItem(
