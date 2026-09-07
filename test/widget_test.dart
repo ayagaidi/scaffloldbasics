@@ -1,31 +1,28 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:scaffloldbasics/main.dart';
 import 'package:scaffloldbasics/myapp.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(myapp());
+  testWidgets('renders the scaffold showcase and records actions', (tester) async {
+    await tester.pumpWidget(const ScaffoldBasicsApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Scaffold Basics Showcase'), findsOneWidget);
+    expect(find.text('Actions performed: 0'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Actions performed: 1'), findsOneWidget);
+    expect(find.text('Action recorded successfully.'), findsOneWidget);
+  });
+
+  testWidgets('switches to the widgets section', (tester) async {
+    await tester.pumpWidget(const ScaffoldBasicsApp());
+
+    await tester.tap(find.text('Widgets').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('FloatingActionButton'), findsOneWidget);
+    expect(find.text('NavigationBar'), findsOneWidget);
   });
 }
